@@ -4,6 +4,7 @@ import IconButton from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Save from "@material-ui/icons/Save";
 import DeleteIcon from '@material-ui/icons/Delete';
+import Button from "@material-ui/core/Button";
 
 class TodoComponent extends React.Component {
     constructor(props) {
@@ -54,57 +55,70 @@ class TodoComponent extends React.Component {
     }
 
     render() {
-        const {todo, deleteTodoById} = this.props;
+        const {todo, deleteTodoById, onOpenModal} = this.props;
         return (<
-            div className="todo"
-                style={
-                    {
-                        display: 'flex',
-                        padding: 5,
-                        background: 'white',
-                        border: '1px solid #000',
-                        margin: '5px',
-                        borderRadius: '10px',
-                        boxShadow: '0 0 10px rgba(0,0,0,0.5)',
-                        overflowX: 'hidden'
-                }
-                }>
+                div className="todo"
+                    style={
+                        {
+                            display: 'flex',
+                            padding: 5,
+                            background: 'white',
+                            border: '1px solid #000',
+                            margin: '5px',
+                            borderRadius: '10px',
+                            boxShadow: '0 0 10px rgba(0,0,0,0.5)',
+
+                        }
+                    }>
                 <Checkbox value={todo.status === 'DONE'}
                           onChange={this.onChangeCheckbox}
+                          disabled={this.state.isEdit}
                 />
                 {this.state.isEdit
                     ? (
-                        <div>
+                        <div className="todoInput">
                             <TextField value={this.state.todoTitle}
                                        onChange={this.onChangeOldTitle}
                                        style={{
-                                           minWidth: '400px',
-                                           maxWidth: '400px',
-                                           wordWrap: 'break-word',
-
+                                           width: '400px'
                                        }}
+
                             />
                             <IconButton onClick={this.onUpdateTitle}
 
                             >
-                                <Save />
+                                <Save/>
                             </IconButton>
                         </div>
                     )
                     : (
-                        <div onClick={this.onTitleClick}>
-                            {todo.title}
-                        </div>
+                        <>
+                            <div onClick={this.onTitleClick}
+                                 className="todoTitle"
+                                 style={{
+                                     wordBreak: 'break-word',
+                                     width: '400px',
+                                 }}
+                            >
+                                {todo.title}
+                            </div>
+                            <Button onClick={() => onOpenModal(todo.id)}>
+                                show more
+                            </Button>
+                        </>
                     )
                 }
                 <IconButton onClick={() => deleteTodoById(todo.id)}
                             style={{
-                                marginLeft:'auto',
-
+                                marginLeft: 'auto',
                             }}
+                            disabled={this.state.isEdit}
                 >
-                   <DeleteIcon />
+                    <DeleteIcon style={{
+                        marginBottom: '6px'
+                    }}/>
                 </IconButton>
+
             </div>
         );
     }

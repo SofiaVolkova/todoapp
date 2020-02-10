@@ -3,7 +3,7 @@ import back from '../../assets/back.jpg';
 import TodoComponent from "./TodoComponent";
 
 function TodoListContainer(props) {
-    const {todoList, updateTodo, deleteTodoById} = props; // array of todo's
+    const {todoList, updateTodo, deleteTodoById, onOpenModal} = props; // array of todo's
     return (
         <div style={{
             position: "relative",
@@ -19,6 +19,7 @@ function TodoListContainer(props) {
                                        todo={todo}
                                        updateTodo={updateTodo}
                                        deleteTodoById={deleteTodoById}
+                                       onOpenModal={onOpenModal}
                         />
                         //границы
                         // заливка
