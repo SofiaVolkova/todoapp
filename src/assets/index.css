@@ -39,5 +39,15 @@ Button {
   margin-top: 10px;
 }
 
+.modalTitle h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
+.modalDescription h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
